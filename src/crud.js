@@ -1,8 +1,8 @@
-import { formatPostcssSourceMap } from "vite";
 import { getUsers, deleteUsers, updateUser } from "./api.js";
 
 let editUser = null;
 const form = document.getElementById("form");
+const userList = document.getElementById("user-list");
 //renderUsers
 const renderUsers = async () => {
 	const users = await getUsers();
@@ -10,7 +10,8 @@ const renderUsers = async () => {
 	users.forEach((user) => {
 		const element = document.createElement("li");
 		element.innerHTML = `<span>${user.name} (${user.email})</span>
-        <button type="button" class="edit" data-id="${user.id}">Eliminar</button>`;
+        <button type="button" class="edit" data-id="${user.id}">Editar</button>
+        <button type="button" class="delete" data-id="${user.id}">Eliminar</button>`;
 		userList.appendChild(element);
 	});
 };
@@ -44,14 +45,14 @@ form.addEventListener("submit", handleSubmit);
 userList.addEventListener("click", (event) => {
 	const target = event.target;
 	if (target.classList.contains("edit")) {
-		const id = target.getAtribute("data-id");
+		const id = target.getAttribute("data-id");
 		const user = Array.from(target.parentNode.children)[0].innerHTML.split(" (");
 		const name = user[0];
 		const email = user[1].replace(")", "");
 
 		handleEdit(id, name, email);
 	} else if (target.classList.contains("delete")) {
-		const id = target.getAtribute("data-id");
+		const id = target.getAttribute("data-id");
 		handleDelete(id);
 	}
 });
