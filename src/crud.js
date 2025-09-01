@@ -7,6 +7,7 @@ const userList = document.getElementById("user-list");
 const renderUsers = async () => {
 	const users = await getUsers();
 	const userList = document.getElementById("user-list");
+	userList.innerHTML = ''; // Limpiar la lista antes de renderizar
 	users.forEach((user) => {
 		const element = document.createElement("li");
 		element.innerHTML = `<span>${user.name} (${user.email})</span>
@@ -21,7 +22,18 @@ const handleSubmit = async (event) => {
 	const name = document.getElementById("name").value;
 	const email = document.getElementById("email").value;
 
-	await updateUser({ name, email, id: editUser.id });
+	if (!name.trim() || !email.trim()) {
+		alert('Por favor, completa todos los campos');
+		return;
+	}
+
+	await updateUser({ 
+		name, 
+		email, 
+		id: editUser?.id // Si editUser es null, será una creación nueva
+	});
+	
+	editUser = null; // Limpiar el estado de edición
 	form.reset();
 	renderUsers();
 };
