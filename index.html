@@ -1,13 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JavaScript Crud</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/src/style.css" />
+		<title>JavaScript Crud</title>
+	</head>
+	<body>
+		<div id="app">
+      <h1>Javascript Crud</h1>
+			<form action="" id="form">
+        
+				<input type="text" id="name" placeholder="Name" required />
+				<input type="email" id="email" placeholder="Email" required />
+				<button type="submit">Enviar</button>
+			</form>
+			<ul id="user-list"></ul>
+		</div>
+		<script type="module" src="/src/main.js"></script>
+	</body>
 </html>
